@@ -113,5 +113,5 @@ def part2(fn):
 
 ################################################################################
 if __name__ == "__main__":
-    # print(part1('day2.dat'))
+    print(part1('day2.dat'))
     print(part2('day2.dat'))
