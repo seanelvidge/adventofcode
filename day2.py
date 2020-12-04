@@ -46,9 +46,8 @@ def part1(fn):
     # Set the above to ints (we'll need to compare with them later)
     df = df.astype({'minLetter':'int32',
                     'maxLetter':'int32'})
-    # There is a nasty ':' in the data - coud do with a nicer way of (quickly)
-    # getting rid of that
-    df[['letter','__']] = df.letterC.str.split(':',expand=True)
+    # There is a nasty ':' in the data - get rid of it
+    df['letter'] = df.letterC.str.replace(':', '')
     # Now count how many letters appear in each password
     df['letterCount'] = df.apply(lambda x: x.pwd.count(x.letter),axis=1)
     # Now check if our password has a valid number of letters:
