@@ -109,15 +109,6 @@ def nearTrees(fn, right, down):
     # How many times are we going down per step / need to go down?
     numSteps = np.ceil(df.shape[0]/down)
 
-    # How many moves right will we do in that time?
-    rightMoves = numSteps*right
-
-    # How many copies of the array do we need?
-    copies = np.int(np.ceil(rightMoves/df.shape[1]))
-
-    # Make the copies of the array
-    df = np.tile(df, copies)
-
     # Set the initial index
     ind = np.array([[down,right]])
 
@@ -127,8 +118,8 @@ def nearTrees(fn, right, down):
     idx = np.repeat(ind, numSteps-1, axis=0)*factors.T
     idx = np.array(idx, dtype=int)
 
-    # Now just pull out of the grid those indices
-    vals = df[idx[:,0], idx[:,1]]
+    # Now just pull out of the grid those indices (and use modulo for one dim)
+    vals = df[idx[:,0], (idx[:,1] % lineLen)]
 
     # Cound the trees ('#')
     return len(np.where(vals == b'#')[0])
